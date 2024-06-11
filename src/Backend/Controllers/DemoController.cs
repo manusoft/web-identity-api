@@ -20,6 +20,10 @@ public class DemoController : ControllerBase
         _logger = logger;
     }
 
+    /// <summary>
+    /// Get random weather forecast for authorized users
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("weather-forecast")]
     [Authorize]
     public IEnumerable<WeatherForecast> Get()
@@ -33,6 +37,11 @@ public class DemoController : ControllerBase
         .ToArray();
     }
 
+    /// <summary>
+    /// Get characters length for authorized users
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("data-processing-users")]
     [Authorize]
     public IActionResult ProcessData1([FromBody] FormModel model)
@@ -40,6 +49,11 @@ public class DemoController : ControllerBase
         return Content($"{model.Message.Length} characters");
     }
 
+    /// <summary>
+    /// Get characters length for authorized role is Manager
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("data-processing-managers")]
     [Authorize(Roles = "Manager")]
     public IActionResult ProcessData2([FromBody] FormModel model)
